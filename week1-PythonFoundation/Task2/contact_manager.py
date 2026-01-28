@@ -15,13 +15,13 @@ def load_contacts():
         with open(CONTACTS_FILE, "r") as file:
             return json.load(file)
     except FileNotFoundError:
-        print("📁 No contacts file found. Starting fresh!")
+        print(" No contacts file found. Starting fresh!")
         return []
     except json.JSONDecodeError:
-        print("⚠️ Contacts file is corrupted. Starting fresh!")
+        print(" Contacts file is corrupted. Starting fresh!")
         return []
     except Exception as e:
-        print(f"❌ Error loading contacts: {e}")
+        print(f" Error loading contacts: {e}")
         return []
 
 
@@ -30,10 +30,10 @@ def save_contacts(contacts):
     try:
         with open(CONTACTS_FILE, "w") as file:
             json.dump(contacts, file, indent=4)
-        print("✅ Contacts saved successfully!")
+        print("Contacts saved successfully!")
         return True
     except Exception as e:
-        print(f"❌ Error saving contacts: {e}")
+        print(f" Error saving contacts: {e}")
         return False
 
 
@@ -44,7 +44,7 @@ def add_contact(contacts):
     # Get name
     name = input("Enter name: ").strip()
     if not name:
-        print("❌ Name cannot be empty!")
+        print(" Name cannot be empty!")
         return
     name = capitalize_name(name)
     
@@ -55,7 +55,7 @@ def add_contact(contacts):
             phone = format_phone(phone)
             break
         else:
-            print("❌ Invalid phone number! Use format: 123-456-7890")
+            print(" Invalid phone number! Use format: 123-456-7890")
     
     # Get email
     while True:
@@ -63,7 +63,7 @@ def add_contact(contacts):
         if validate_email(email):
             break
         else:
-            print("❌ Invalid email! Must contain @ and domain")
+            print(" Invalid email! Must contain @ and domain")
     
     # Optional address
     address = input("Enter address (optional): ").strip()
@@ -77,13 +77,13 @@ def add_contact(contacts):
     }
     
     contacts.append(contact)
-    print(f"✅ Contact '{name}' added successfully!")
+    print(f" Contact '{name}' added successfully!")
 
 
 def display_contacts(contacts):
     """Display all contacts"""
     if not contacts:
-        print("\n📭 No contacts found!")
+        print("\nNo contacts found!")
         return
     
     print("\n" + "=" * 70)
@@ -100,7 +100,7 @@ def display_contacts(contacts):
 def search_contact(contacts):
     """Search for a contact by name"""
     if not contacts:
-        print("\n📭 No contacts to search!")
+        print("\n No contacts to search!")
         return
     
     search_term = input("\nEnter name to search: ").strip().lower()
@@ -108,10 +108,10 @@ def search_contact(contacts):
     found_contacts = [c for c in contacts if search_term in c['name'].lower()]
     
     if not found_contacts:
-        print(f"❌ No contacts found matching '{search_term}'")
+        print(f"No contacts found matching '{search_term}'")
         return
     
-    print(f"\n✅ Found {len(found_contacts)} contact(s):")
+    print(f"\n Found {len(found_contacts)} contact(s):")
     print("=" * 70)
     
     for i, contact in enumerate(found_contacts, 1):
@@ -133,7 +133,7 @@ def update_contact(contacts):
     found_indices = [i for i, c in enumerate(contacts) if search_term in c['name'].lower()]
     
     if not found_indices:
-        print(f"❌ No contacts found matching '{search_term}'")
+        print(f" No contacts found matching '{search_term}'")
         return
     
     if len(found_indices) > 1:
@@ -169,7 +169,7 @@ def update_contact(contacts):
     if new_address:
         contact['address'] = new_address
     
-    print("✅ Contact updated successfully!")
+    print("Contact updated successfully!")
 
 
 def delete_contact(contacts):
@@ -183,7 +183,7 @@ def delete_contact(contacts):
     found_indices = [i for i, c in enumerate(contacts) if search_term in c['name'].lower()]
     
     if not found_indices:
-        print(f"❌ No contacts found matching '{search_term}'")
+        print(f" No contacts found matching '{search_term}'")
         return
     
     if len(found_indices) > 1:
@@ -199,9 +199,9 @@ def delete_contact(contacts):
     
     if confirm_action(f"Delete '{contact['name']}'?"):
         contacts.pop(index)
-        print("✅ Contact deleted successfully!")
+        print(" Contact deleted successfully!")
     else:
-        print("❌ Deletion cancelled")
+        print("Deletion cancelled")
 
 
 def main():
@@ -210,7 +210,7 @@ def main():
     
     while True:
         print("\n" + "=" * 50)
-        print("  📞 CONTACT MANAGER")
+        print("   CONTACT MANAGER")
         print("=" * 50)
         print("  1. Add Contact")
         print("  2. View All Contacts")
@@ -238,14 +238,14 @@ def main():
                 print("\n👋 Goodbye!")
                 break
             else:
-                print("❌ Invalid choice! Please enter 1-6")
+                print("Invalid choice! Please enter 1-6")
         
         except KeyboardInterrupt:
-            print("\n\n⚠️ Interrupted! Saving contacts...")
+            print("\n\n Interrupted! Saving contacts...")
             save_contacts(contacts)
             break
         except Exception as e:
-            print(f"❌ An error occurred: {e}")
+            print(f" An error occurred: {e}")
 
 
 if __name__ == "__main__":
