@@ -57,6 +57,5 @@ for row in buttons:
             if cols[i].button(btn):
                 press(btn)
 
-# NOW fill the display AFTER all buttons have run
-# This way it always shows the latest value
+
 display_placeholder.text_area(" ", value=st.session_state.expression, disabled=True, height=80)
