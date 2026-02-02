@@ -1,7 +1,7 @@
-Mobile Calculator
+Mobile Calculator:
 A simple calculator app built with Python and Streamlit.
-Features
 
+Features:
 Basic arithmetic operations: Addition, Subtraction, Multiplication, Division
 Decimal number support
 Clear (C) and Backspace (⌫) functionality
